@@ -37,6 +37,10 @@ public class BlockRegistry {
             () -> new KeyCabinetBlock(KeyType.CABINET_3)
     );
 
+    public static final RegistryObject<Block> MORGUE_KEY_BLOCK = BLOCKS.register("morgue_key_block",
+            () -> new KeyCabinetBlock(KeyType.MORGUE)
+    );
+
     // 4. Hospital Key Block (специальный блок с TileEntity для хранения NBT)
     public static final RegistryObject<Block> HOSPITAL_KEY_BLOCK = BLOCKS.register("hospital_key_block",
             () -> new HospitalKeyBlock(Block.Properties.of(Material.METAL)

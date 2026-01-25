@@ -170,6 +170,9 @@ public class KeyCabinetBlock extends Block {
             case SECURITY:
                 blockToPlace = BlockRegistry.SECURITY_KEY_CABINET_BLOCK.get();
                 break;
+            case MORGUE:
+                blockToPlace = BlockRegistry.MORGUE_KEY_BLOCK.get();
+                break;
             default:
                 blockToPlace = BlockRegistry.KEY_CABINET_BLOCK.get();
                 break;
