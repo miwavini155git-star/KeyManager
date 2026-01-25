@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hunt:block/key"
+    }
+  }
+}

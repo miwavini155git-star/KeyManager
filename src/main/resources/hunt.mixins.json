@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ru.iglo.hunt.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "hunt.refmap.json",
+  "mixins": [],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

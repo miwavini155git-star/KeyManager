@@ -1,0 +1,49 @@
+{
+	"parent": "hunt:item/key",
+	"overrides": [
+		{
+			"predicate": {"custom_model_data": 1},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 2},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 3},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 4},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 5},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 6},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 7},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 8},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 9},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 10},
+			"model": "hunt:item/key"
+		},
+		{
+			"predicate": {"custom_model_data": 11},
+			"model": "hunt:item/key"
+		}
+	]
+}

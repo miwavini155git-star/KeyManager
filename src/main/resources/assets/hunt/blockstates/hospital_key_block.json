@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hunt:block/hospital_key_block"
+    }
+  }
+}

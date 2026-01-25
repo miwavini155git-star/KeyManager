@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hunt:block/security_key_cabinet"
+    }
+  }
+}

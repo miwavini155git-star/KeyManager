@@ -1,0 +1,25 @@
+modLoader = "javafml"
+loaderVersion = "[36,)"
+license = "All Rights Reserved"
+
+logoFile = "logo.png"
+
+[[mods]]
+modId = "hunt"
+version = "1.0.0"
+displayName = "Hunt"
+description = "SKUF"
+
+[[dependencies.hunt]]
+modId = "forge"
+mandatory = true
+versionRange = "[36,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hunt]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.5]"
+ordering = "NONE"
+side = "BOTH"
