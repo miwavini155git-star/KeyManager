@@ -1,5 +1,6 @@
 package ru.iglo.hunt.events;
 
+import com.mcwdoors.kikoz.init.BlockInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
@@ -32,7 +33,7 @@ public class DoorInteractionHandler {
         Hand hand = event.getHand();
 
         if (world.isClientSide()) return;
-        if (!state.is(Blocks.IRON_DOOR)) return;
+        if (!state.is(Blocks.IRON_DOOR.getBlock())) return;
 
         // Ищем нижний блок двери
         BlockPos lowerPos = pos;
@@ -100,7 +101,7 @@ public class DoorInteractionHandler {
      * Открывает/закрывает дверь
      */
     private static void toggleDoor(World world, BlockPos lowerPos, BlockState lowerState) {
-        if (!lowerState.is(Blocks.IRON_DOOR)) return;
+        if (!lowerState.is(Blocks.IRON_DOOR.getBlock())) return;
 
         // Получаем верхнюю часть двери
         BlockPos upperPos = lowerPos.above();

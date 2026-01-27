@@ -1,6 +1,7 @@
 // ConsumableKeyDoorHandler.java
 package ru.iglo.hunt.events;
 
+import com.mcwdoors.kikoz.init.BlockInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
@@ -32,7 +33,7 @@ public class ConsumableKeyDoorHandler {
         Hand hand = event.getHand();
 
         if (world.isClientSide()) return;
-        if (!state.is(Blocks.IRON_DOOR)) return;
+        if (!state.is(Blocks.IRON_DOOR.getBlock())) return;
 
         // Ищем нижний блок двери
         BlockPos lowerPos = pos;
@@ -56,7 +57,10 @@ public class ConsumableKeyDoorHandler {
 
                 // УДАЛЯЕМ КЛЮЧ (если не в креативе)
                 if (!player.isCreative()) {
-                    heldItem.shrink(1); // Уменьшаем количество на 1
+                    // Получаем предмет в руке
+
+                    // Уменьшаем количество на 1
+                    heldItem.shrink(1);
 
                     // Если ключ закончился, удаляем стек полностью
                     if (heldItem.isEmpty()) {
@@ -110,7 +114,7 @@ public class ConsumableKeyDoorHandler {
      */
     private static void toggleDoor(World world, BlockPos lowerPos) {
         BlockState state = world.getBlockState(lowerPos);
-        if (!state.is(Blocks.IRON_DOOR)) return;
+        if (!state.is(Blocks.IRON_DOOR.getBlock())) return;
 
         BlockPos upperPos = lowerPos.above();
         BlockState upperState = world.getBlockState(upperPos);

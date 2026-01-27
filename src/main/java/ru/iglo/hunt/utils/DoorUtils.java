@@ -1,5 +1,7 @@
 package ru.iglo.hunt.utils;
 
+import com.mcwdoors.kikoz.init.BlockInit;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;

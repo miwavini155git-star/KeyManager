@@ -236,7 +236,6 @@ public class HospitalKeyItem extends Item {
                         .withStyle(TextFormatting.GREEN, TextFormatting.BOLD));
             }
 
-            player.displayClientMessage(message, true);
 
             // Звук ключа (можно добавить позже)
             // world.playSound(null, player.blockPosition(), SoundEvents.ITEM_BREAK,

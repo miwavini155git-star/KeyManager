@@ -1,5 +1,6 @@
 package ru.iglo.hunt.events;
 
+import com.mcwdoors.kikoz.init.BlockInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,7 +25,7 @@ public class DoorProtectionHandler {
         PlayerEntity player = event.getPlayer();
 
         if (world.isClientSide()) return;
-        if (!state.is(Blocks.IRON_DOOR)) return;
+        if (!state.is(Blocks.IRON_DOOR.getBlock())) return;
 
         // Ищем нижний блок двери
         BlockPos lowerPos = pos;

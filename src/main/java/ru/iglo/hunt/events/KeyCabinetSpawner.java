@@ -19,21 +19,7 @@ public class KeyCabinetSpawner {
 
         if (world.isClientSide()) return;
 
-        // Создаем дверь морга на 0,4,0
         BlockPos doorPos = DoorUtils.createIronDoor(world, 0, 4, 0, KeyType.MORGUE);
-
-        if (doorPos != null) {
-            System.out.println("[KeyCabinetSpawner] Дверь морга создана на " + doorPos);
-
-            // Создаем шкафчик с ключом от морга рядом
-            BlockPos cabinetPos = new BlockPos(3, 4, 0);
-            if (world.getBlockState(cabinetPos).isAir()) {
-                ru.iglo.hunt.blocks.KeyCabinetBlock.setupCabinet(world, cabinetPos, KeyType.MORGUE);
-                System.out.println("[KeyCabinetSpawner] Ключ от морга размещен рядом на " + cabinetPos);
-            }
-
-            // Показываем все сохраненные двери (для отладки)
-            DoorUtils.printAllDoors();
-        }
+        BlockPos doorPoss = DoorUtils.createIronDoor(world, 0, 4, 2, KeyType.CABINET_1);
     }
 }

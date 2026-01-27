@@ -119,17 +119,6 @@ public class KeyCabinetBlock extends Block {
                 System.out.println("[Hunt] ОШИБКА: Не удалось удалить блок на " + pos);
             }
 
-            // Сообщение игроку с информацией о ключе
-            String keyInfo = "§eПолучен ключ: §6" + containedKeyType.getDisplayName();
-            if (isUnique) {
-                keyInfo += " §a✓";
-            }
-            
-            player.displayClientMessage(
-                    new net.minecraft.util.text.StringTextComponent(keyInfo),
-                    true
-            );
-
             return ActionResultType.SUCCESS;
         }
 
