@@ -1,6 +1,7 @@
 package ru.iglo.hunt.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -12,6 +13,7 @@ import ru.iglo.hunt.blocks.KeyCabinetBlock;
 import ru.iglo.hunt.items.HospitalKeyItem;
 import ru.iglo.hunt.keys.KeyType;
 import ru.iglo.hunt.managers.HospitalKeyManager;
+import ru.iglo.hunt.utils.DoorUtils;
 
 import java.util.Locale;
 
@@ -20,8 +22,55 @@ public class HospitalKeyCommands {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(
                 Commands.literal("hospitalkey")
-                        .requires(source -> source.hasPermission(2)) // Только для операторов
 
+                        .requires(source -> source.hasPermission(2)) // Только для операторов
+                        .then(Commands.literal("createdoor")
+                                .then(Commands.argument("x", IntegerArgumentType.integer())
+                                        .then(Commands.argument("y", IntegerArgumentType.integer())
+                                                .then(Commands.argument("z", IntegerArgumentType.integer())
+                                                        .then(Commands.argument("key", StringArgumentType.string())
+                                                                .suggests((context, builder) -> {
+                                                                    // Автодополнение типов ключей
+                                                                    String[] keyTypes = {
+                                                                            "cabinet_1", "cabinet_2", "cabinet_3",
+                                                                            "library", "security", "server",
+                                                                            "basement", "morgue", "chief",
+                                                                            "electrical", "master", "none"
+                                                                    };
+                                                                    for (String type : keyTypes) {
+                                                                        builder.suggest(type);
+                                                                    }
+                                                                    return builder.buildFuture();
+                                                                })
+                                                                .executes(context -> {
+                                                                    int x = IntegerArgumentType.getInteger(context, "x");
+                                                                    int y = IntegerArgumentType.getInteger(context, "y");
+                                                                    int z = IntegerArgumentType.getInteger(context, "z");
+                                                                    String keyTypeStr = StringArgumentType.getString(context, "key");
+
+                                                                    CommandSource source = context.getSource();
+                                                                    World world = source.getLevel();
+
+                                                                    KeyType keyType = "none".equals(keyTypeStr) ? null :
+                                                                            KeyType.fromId("key_" + keyTypeStr);
+
+                                                                    BlockPos doorPos = DoorUtils.createIronDoor(world, x, y, z, keyType);
+
+                                                                    if (doorPos != null) {
+                                                                        source.sendSuccess(
+                                                                                new StringTextComponent("§aДверь создана на " +
+                                                                                        x + ", " + y + ", " + z +
+                                                                                        (keyType != null ? " с ключом " + keyType.getDisplayName() : "")),
+                                                                                true
+                                                                        );
+                                                                        return 1;
+                                                                    } else {
+                                                                        source.sendFailure(new StringTextComponent("§cНе удалось создать дверь"));
+                                                                        return 0;
+                                                                    }
+                                                                })
+                                                        ))))
+                        )
                         // Команда: /hospitalkey give <type>
                         .then(Commands.literal("give")
                                 .then(Commands.argument("type", StringArgumentType.string())

@@ -247,26 +247,6 @@ public class HospitalKeyItem extends Item {
     }
 
     @Override
-    public ActionResultType useOn(ItemUseContext context) {
-        // Ключ можно "применить" к дверям (логика дверей будет отдельно)
-        if (!context.getLevel().isClientSide()) {
-            PlayerEntity player = context.getPlayer();
-            ItemStack stack = context.getItemInHand();
-
-            KeyType keyType = getKeyType(stack);
-            player.displayClientMessage(
-                    new StringTextComponent("Попытка открыть дверь ключом: " + keyType.getDisplayName())
-                            .withStyle(TextFormatting.YELLOW),
-                    true
-            );
-
-            // Здесь будет логика проверки доступа к дверям
-        }
-
-        return ActionResultType.SUCCESS;
-    }
-
-    @Override
     public void appendHoverText(ItemStack stack, @Nullable World world,
                                 List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.appendHoverText(stack, world, tooltip, flag);

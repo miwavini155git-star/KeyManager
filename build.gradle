@@ -73,6 +73,7 @@ dependencies {
     implementation fg.deobf("curse.maven:ctm-359540:7255602")
     implementation fg.deobf("curse.maven:mrcrayfish-55438:3346467")
     implementation fg.deobf("curse.maven:worldedit-225608:3283693")
+    implementation fg.deobf("curse.maven:macaws-378646:6146365")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
