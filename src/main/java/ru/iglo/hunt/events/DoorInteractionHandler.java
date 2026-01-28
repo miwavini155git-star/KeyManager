@@ -45,7 +45,7 @@ public class DoorInteractionHandler {
         BlockState lowerState = world.getBlockState(lowerPos);
 
         // Проверяем, защищена ли эта дверь
-        if (DoorUtils.hasDoorKey(lowerPos)) {
+        if (DoorUtils.hasDoorKey(lowerPos, world)) {
             // Дверь защищена, проверяем ключ у игрока
             ItemStack heldItem = player.getItemInHand(hand);
             KeyType playerKeyType = null;
@@ -54,7 +54,7 @@ public class DoorInteractionHandler {
                 playerKeyType = HospitalKeyItem.getKeyType(heldItem);
             }
 
-            if (playerKeyType != null && DoorUtils.checkDoorKey(lowerPos, playerKeyType)) {
+            if (playerKeyType != null && DoorUtils.checkDoorKey(lowerPos, playerKeyType, world)) {
                 // Ключ подходит - ОТКРЫВАЕМ/ЗАКРЫВАЕМ ДВЕРЬ
                 toggleDoor(world, lowerPos, lowerState);
 
@@ -63,7 +63,7 @@ public class DoorInteractionHandler {
                 boolean isOpen = lowerState.getValue(DoorBlock.OPEN);
 
                 player.displayClientMessage(
-                        new StringTextComponent("§a" + doorName + " " +
+                        new StringTextComponent("§a" +
                                 (isOpen ? "закрыта" : "открыта") +
                                 " ключом " + playerKeyType.getDisplayName()),
                         true

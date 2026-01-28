@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import ru.iglo.hunt.data.DoorDataStorage;
 import ru.iglo.hunt.keys.KeyType;
 
 import javax.annotation.Nullable;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 public class DoorUtils {
 
-    // Простое хранилище в памяти (только для текущей сессии)
+    // Для обратной совместимости (может быть удалено позже)
     private static final Map<Long, KeyType> DOOR_KEYS = new HashMap<>(); // Long = BlockPos.asLong()
 
     /**
@@ -59,42 +60,59 @@ public class DoorUtils {
         world.setBlock(lowerPos, lowerState, 3);
         world.setBlock(upperPos, upperState, 3);
 
-        // Сохраняем информацию о ключе
+        // Сохраняем информацию о ключе в оба хранилища
         if (keyType != null) {
+            // Локальное хранилище (для сессии)
             DOOR_KEYS.put(lowerPos.asLong(), keyType);
+            
+            // Долговременное хранилище (между сессиями)
+            saveDoorPersistent(world, lowerPos, keyType);
+            
             System.out.println("[DoorUtils] Дверь создана на " + lowerPos + " с ключом " + keyType);
         } else {
             System.out.println("[DoorUtils] Дверь создана на " + lowerPos + " без ключа");
-        }
-
-        // Для долговременного хранения (если это серверный мир)
-        if (!world.isClientSide()) {
-            saveDoorPersistent(lowerPos, keyType);
         }
 
         return lowerPos;
     }
 
     /**
-     * Сохраняет дверь для долговременного хранения
+     * Сохраняет дверь для долговременного хранения между сессиями
      */
-    private static void saveDoorPersistent(BlockPos doorPos, KeyType keyType) {
-        // Для постоянного хранения между сессиями можно использовать разные методы:
-        // 1. Запись в файл
-        // 2. Использование WorldSavedData (но нужен доступ к ServerWorld)
-        // 3. NBT данных в самом мире
-
-        System.out.println("[DoorUtils] Дверь сохранена для сессии: " + doorPos + " -> " + keyType);
+    private static void saveDoorPersistent(World world, BlockPos doorPos, KeyType keyType) {
+        if (world.isClientSide()) {
+            return;
+        }
+        
+        DoorDataStorage storage = DoorDataStorage.get(world);
+        if (storage != null) {
+            storage.saveDoor(doorPos, keyType);
+            System.out.println("[DoorUtils] Дверь сохранена в WorldSavedData: " + doorPos + " -> " + keyType);
+        }
     }
 
     /**
      * Проверяет, открывается ли дверь данным ключом
      * @param doorPos позиция нижнего блока двери
      * @param keyType тип ключа для проверки
+     * @param world мир (для получения сохраненных данных)
      * @return true если ключ подходит
      */
-    public static boolean checkDoorKey(BlockPos doorPos, KeyType keyType) {
-        KeyType requiredKey = DOOR_KEYS.get(doorPos.asLong());
+    public static boolean checkDoorKey(BlockPos doorPos, KeyType keyType, World world) {
+        KeyType requiredKey = null;
+        
+        // Сначала проверяем долговременное хранилище
+        if (!world.isClientSide()) {
+            DoorDataStorage storage = DoorDataStorage.get(world);
+            if (storage != null) {
+                requiredKey = storage.getDoorKey(doorPos);
+            }
+        }
+        
+        // Если не найдено, проверяем локальное хранилище
+        if (requiredKey == null) {
+            requiredKey = DOOR_KEYS.get(doorPos.asLong());
+        }
 
         if (requiredKey == null) {
             return true; // Дверь без ключа открывается всегда
@@ -107,12 +125,57 @@ public class DoorUtils {
 
         return keyType == requiredKey;
     }
+    
+    /**
+     * Старая версия без мира (не рекомендуется использовать)
+     * @deprecated Используйте checkDoorKey(BlockPos, KeyType, World) вместо этого
+     */
+    @Deprecated
+    public static boolean checkDoorKey(BlockPos doorPos, KeyType keyType) {
+        KeyType requiredKey = DOOR_KEYS.get(doorPos.asLong());
+
+        if (requiredKey == null) {
+            return true;
+        }
+
+        if (keyType == KeyType.MASTER_KEY) {
+            return true;
+        }
+
+        return keyType == requiredKey;
+    }
 
     /**
      * Получает тип ключа, необходимый для двери
      * @param doorPos позиция нижнего блока двери
+     * @param world мир (для получения сохраненных данных)
      * @return тип ключа или null если дверь без ключа
      */
+    @Nullable
+    public static KeyType getDoorKeyType(BlockPos doorPos, World world) {
+        KeyType keyType = null;
+        
+        // Сначала проверяем долговременное хранилище
+        if (!world.isClientSide()) {
+            DoorDataStorage storage = DoorDataStorage.get(world);
+            if (storage != null) {
+                keyType = storage.getDoorKey(doorPos);
+            }
+        }
+        
+        // Если не найдено, проверяем локальное хранилище
+        if (keyType == null) {
+            keyType = DOOR_KEYS.get(doorPos.asLong());
+        }
+        
+        return keyType;
+    }
+    
+    /**
+     * Старая версия без мира (не рекомендуется использовать)
+     * @deprecated Используйте getDoorKeyType(BlockPos, World) вместо этого
+     */
+    @Deprecated
     @Nullable
     public static KeyType getDoorKeyType(BlockPos doorPos) {
         return DOOR_KEYS.get(doorPos.asLong());
@@ -121,7 +184,26 @@ public class DoorUtils {
     /**
      * Удаляет информацию о двери
      * @param doorPos позиция двери
+     * @param world мир
      */
+    public static void removeDoor(BlockPos doorPos, World world) {
+        DOOR_KEYS.remove(doorPos.asLong());
+        
+        if (!world.isClientSide()) {
+            DoorDataStorage storage = DoorDataStorage.get(world);
+            if (storage != null) {
+                storage.removeDoor(doorPos);
+            }
+        }
+        
+        System.out.println("[DoorUtils] Информация о двери удалена: " + doorPos);
+    }
+    
+    /**
+     * Старая версия без мира (не рекомендуется использовать)
+     * @deprecated Используйте removeDoor(BlockPos, World) вместо этого
+     */
+    @Deprecated
     public static void removeDoor(BlockPos doorPos) {
         DOOR_KEYS.remove(doorPos.asLong());
         System.out.println("[DoorUtils] Информация о двери удалена: " + doorPos);
@@ -130,8 +212,27 @@ public class DoorUtils {
     /**
      * Проверяет, есть ли у двери ключ
      * @param doorPos позиция двери
+     * @param world мир
      * @return true если дверь защищена ключом
      */
+    public static boolean hasDoorKey(BlockPos doorPos, World world) {
+        // Проверяем долговременное хранилище
+        if (!world.isClientSide()) {
+            DoorDataStorage storage = DoorDataStorage.get(world);
+            if (storage != null && storage.hasDoor(doorPos)) {
+                return true;
+            }
+        }
+        
+        // Проверяем локальное хранилище
+        return DOOR_KEYS.containsKey(doorPos.asLong());
+    }
+    
+    /**
+     * Старая версия без мира (не рекомендуется использовать)
+     * @deprecated Используйте hasDoorKey(BlockPos, World) вместо этого
+     */
+    @Deprecated
     public static boolean hasDoorKey(BlockPos doorPos) {
         return DOOR_KEYS.containsKey(doorPos.asLong());
     }
