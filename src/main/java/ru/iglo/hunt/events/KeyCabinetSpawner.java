@@ -6,6 +6,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import ru.iglo.hunt.Hunt;
+import ru.iglo.hunt.blocks.KeyCabinetBlock;
 import ru.iglo.hunt.utils.DoorUtils;
 import ru.iglo.hunt.keys.KeyType;
 
@@ -14,12 +15,7 @@ public class KeyCabinetSpawner {
 
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (!(event.getWorld() instanceof World)) return;
-        World world = (World) event.getWorld();
-
-        if (world.isClientSide()) return;
-
-        BlockPos doorPos = DoorUtils.createIronDoor(world, 0, 4, 0, KeyType.MORGUE);
-        BlockPos doorPoss = DoorUtils.createIronDoor(world, 0, 4, 2, KeyType.CABINET_1);
+        KeyCabinetBlock.setupCabinet((World) event.getWorld(), new BlockPos(-2,4,2), KeyType.MORGUE);
+        DoorUtils.createIronDoor(event.getPlayer().level, 0, 4, 0, KeyType.MORGUE);
     }
 }

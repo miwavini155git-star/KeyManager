@@ -74,6 +74,13 @@ dependencies {
     implementation fg.deobf("curse.maven:mrcrayfish-55438:3346467")
     implementation fg.deobf("curse.maven:worldedit-225608:3283693")
     implementation fg.deobf("curse.maven:macaws-378646:6146365")
+    implementation fg.deobf("curse.maven:iris-581495:5194273")
+    //implementation fg.deobf("curse.maven:rubidium-574856:4743730")
+    implementation fg.deobf("curse.maven:embeddium-908741:5322311")
+    implementation fg.deobf("curse.maven:bad-mobs-233258:3844517")
+    implementation fg.deobf("curse.maven:signtastic-518228:3598215")
+    implementation fg.deobf("curse.maven:mcjtylib-233105:3848282")
+    implementation fg.deobf("curse.maven:fog-overrides-398134:3251619")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
