@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lying=false": {
+      "model": "hunt:block/tablichka_standing"
+    },
+    "lying=true": {
+      "model": "hunt:block/tablichka_lying"
+    }
+  }
+}

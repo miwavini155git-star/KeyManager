@@ -81,6 +81,11 @@ dependencies {
     implementation fg.deobf("curse.maven:signtastic-518228:3598215")
     implementation fg.deobf("curse.maven:mcjtylib-233105:3848282")
     implementation fg.deobf("curse.maven:fog-overrides-398134:3251619")
+    implementation fg.deobf("curse.maven:figura-901503:6204459")
+    implementation fg.deobf("curse.maven:chisels-bits-231095:3593643")
+    implementation fg.deobf("curse.maven:goprone-327968:3114132")
+    implementation fg.deobf("curse.maven:morph-229080:4397367")
+    implementation fg.deobf("curse.maven:ichunutil-229060:4397363")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 

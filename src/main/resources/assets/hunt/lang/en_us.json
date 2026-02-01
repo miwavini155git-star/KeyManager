@@ -25,5 +25,7 @@
   "item.hunt.key_morgue": "Morgue Key",
   "item.hunt.key_chief": "Chief Doctor Key",
   "item.hunt.key_electrical": "Electrical Room Key",
-  "item.hunt.key_master": "Master Key"
+  "item.hunt.key_master": "Master Key",
+  "block.hunt.tablichka": "Tablichka Sign",
+  "item.hunt.tablichka": "Tablichka Sign"
 }

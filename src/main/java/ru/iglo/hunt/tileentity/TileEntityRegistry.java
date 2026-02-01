@@ -36,4 +36,13 @@ public class TileEntityRegistry {
                             BlockRegistry.HOSPITAL_KEY_BLOCK.get()
                     ).build(null)
             );
+
+    // Для TablichkaBlock (табличка с двумя моделями)
+    public static final RegistryObject<TileEntityType<TablichkaTileEntity>> TABLICHKA_TILE_ENTITY =
+            TILE_ENTITIES.register("tablichka_te",
+                    () -> TileEntityType.Builder.of(
+                            TablichkaTileEntity::new,
+                            BlockRegistry.TABLICHKA_BLOCK.get()
+                    ).build(null)
+            );
 }

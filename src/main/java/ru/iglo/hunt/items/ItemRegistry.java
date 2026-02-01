@@ -74,4 +74,11 @@ public class ItemRegistry {
                     .tab(ItemGroup.TAB_DECORATIONS)
             )
     );
+
+    // Табличка с двумя моделями
+    public static final RegistryObject<Item> TABLICHKA_ITEM = ITEMS.register("tablichka",
+            () -> new BlockItem(BlockRegistry.TABLICHKA_BLOCK.get(), new Item.Properties()
+                    .tab(ItemGroup.TAB_DECORATIONS)
+            )
+    );
 }

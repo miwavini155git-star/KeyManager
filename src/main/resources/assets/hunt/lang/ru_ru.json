@@ -25,5 +25,7 @@
   "item.hunt.key_morgue": "Ключ от морга",
   "item.hunt.key_chief": "Ключ от кабинета главврача",
   "item.hunt.key_electrical": "Ключ от щитовой",
-  "item.hunt.key_master": "Мастер-ключ"
+  "item.hunt.key_master": "Мастер-ключ",
+  "block.hunt.tablichka": "Табличка",
+  "item.hunt.tablichka": "Табличка"
 }

@@ -54,4 +54,12 @@ public class BlockRegistry {
     public static final RegistryObject<Block> KEY_CABINET_BLOCK = BLOCKS.register("key_cabinet",
             () -> new KeyCabinetBlock() // Дефолтный конструктор
     );
+
+    // 6. Табличка с двумя моделями (стоячая и лежачая)
+    public static final RegistryObject<Block> TABLICHKA_BLOCK = BLOCKS.register("tablichka",
+            () -> new ru.iglo.hunt.block.TablichkaBlock(Block.Properties.of(Material.WOOD)
+                    .noOcclusion()
+                    .strength(1.0f, 1.0f)
+            )
+    );
 }
