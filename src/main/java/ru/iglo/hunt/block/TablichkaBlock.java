@@ -68,7 +68,7 @@ public class TablichkaBlock extends Block {
     }
 
     /**
-     * TileEntity для хранения данных
+     * TileEntity &#x434;&#x43B;&#x44F; &#x445;&#x440;&#x430;&#x43D;&#x435;&#x43D;&#x438;&#x44F; &#x434;&#x430;&#x43D;&#x43D;&#x44B;&#x445;
      */
     @Override
     public boolean hasTileEntity(BlockState state) {
