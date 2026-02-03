@@ -1,10 +1,36 @@
 {
   "variants": {
-    "lying=false": {
-      "model": "hunt:block/tablichka_standing"
+    "lying=false,facing=north": {
+      "model": "hunt:block/tablichka_standing",
+      "y": 0
     },
-    "lying=true": {
-      "model": "hunt:block/tablichka_lying"
+    "lying=false,facing=south": {
+      "model": "hunt:block/tablichka_standing",
+      "y": 180
+    },
+    "lying=false,facing=east": {
+      "model": "hunt:block/tablichka_standing",
+      "y": 90
+    },
+    "lying=false,facing=west": {
+      "model": "hunt:block/tablichka_standing",
+      "y": 270
+    },
+    "lying=true,facing=north": {
+      "model": "hunt:block/tablichka_lying",
+      "y": 0
+    },
+    "lying=true,facing=south": {
+      "model": "hunt:block/tablichka_lying",
+      "y": 180
+    },
+    "lying=true,facing=east": {
+      "model": "hunt:block/tablichka_lying",
+      "y": 90
+    },
+    "lying=true,facing=west": {
+      "model": "hunt:block/tablichka_lying",
+      "y": 270
     }
   }
 }
