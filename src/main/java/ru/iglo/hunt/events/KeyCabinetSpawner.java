@@ -15,9 +15,5 @@ public class KeyCabinetSpawner {
 
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        KeyCabinetBlock.setupCabinet((World) event.getWorld(), new BlockPos(-2,4,2), KeyType.MORGUE);
-        KeyCabinetBlock.setupCabinet((World) event.getWorld(), new BlockPos( -13,4,-2), KeyType.CABINET_1);
-        DoorUtils.createIronDoor(event.getPlayer().level, 0, 4, 0, KeyType.MORGUE);
-        DoorUtils.createIronDoor(event.getPlayer().level, -14,4,0, KeyType.CABINET_1);
     }
 }
