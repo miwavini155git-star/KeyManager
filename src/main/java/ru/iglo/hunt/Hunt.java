@@ -56,7 +56,7 @@ public class Hunt {
         }
     }
 
-    @Mod.EventBusSubscriber
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class EventBreakClient {
         @SubscribeEvent
         public static void event(PlayerEvent.PlayerLoggedInEvent event) {
@@ -73,8 +73,8 @@ public class Hunt {
                 LOGGER.error("Error creating HuntEngine directory", e);
             }
             Path scriptPath = huntEngineDir.resolve("test.js");
-            HuntEngine engine = new HuntEngine((ServerPlayerEntity) event.getPlayer());
-            engine.executeScript(scriptPath);
+            // HuntEngine engine = new HuntEngine((ServerPlayerEntity) event.getPlayer());
+            // engine.executeScript(scriptPath);
         }
     }
 

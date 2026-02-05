@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "hunt:block/schkaf"
+    },
+    "facing=south": {
+      "model": "hunt:block/schkaf",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hunt:block/schkaf",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "hunt:block/schkaf",
+      "y": 90
+    }
+  }
+}

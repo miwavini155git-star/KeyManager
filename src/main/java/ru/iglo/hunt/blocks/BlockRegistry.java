@@ -6,6 +6,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import ru.iglo.hunt.block.BenchBlock;
+import ru.iglo.hunt.block.SchkafBlock;
 import ru.iglo.hunt.keys.KeyType;
 
 public class BlockRegistry {
@@ -67,6 +68,14 @@ public class BlockRegistry {
     // 7. Скамейка из железа с поддержкой разных направлений
     public static final RegistryObject<Block> BENCH_IRON_BLOCK = BLOCKS.register("bench_iron",
             () -> new BenchBlock(Block.Properties.of(Material.METAL)
+                    .noOcclusion()
+                    .strength(2.0f, 2.0f)
+            )
+    );
+
+    // 8. Шкаф (Schkaf) с моделью и текстурой
+    public static final RegistryObject<Block> SCHKAF_BLOCK = BLOCKS.register("schkaf",
+            () -> new SchkafBlock(Block.Properties.of(Material.METAL)
                     .noOcclusion()
                     .strength(2.0f, 2.0f)
             )

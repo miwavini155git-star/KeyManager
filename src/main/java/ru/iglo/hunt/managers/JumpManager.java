@@ -10,10 +10,6 @@ public class JumpManager {
         return jumpEnabled;
     }
 
-    public static void setJumpEnabled(boolean enabled) {
-        jumpEnabled = enabled;
-    }
-
     public static void toggleJump() {
         jumpEnabled = !jumpEnabled;
     }

@@ -88,4 +88,11 @@ public class ItemRegistry {
                     .tab(ItemGroup.TAB_DECORATIONS)
             )
     );
+
+    // Шкаф (Schkaf)
+    public static final RegistryObject<Item> SCHKAF_ITEM = ITEMS.register("schkaf",
+            () -> new BlockItem(BlockRegistry.SCHKAF_BLOCK.get(), new Item.Properties()
+                    .tab(ItemGroup.TAB_DECORATIONS)
+            )
+    );
 }
