@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "hunt:block/bench_iron",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "hunt:block/bench_iron",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hunt:block/bench_iron",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "hunt:block/bench_iron",
+      "y": 90
+    }
+  }
+}

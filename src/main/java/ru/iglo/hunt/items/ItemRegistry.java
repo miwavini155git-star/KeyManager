@@ -81,4 +81,11 @@ public class ItemRegistry {
                     .tab(ItemGroup.TAB_DECORATIONS)
             )
     );
+
+    // Скамейка из железа
+    public static final RegistryObject<Item> BENCH_IRON_ITEM = ITEMS.register("bench_iron",
+            () -> new BlockItem(BlockRegistry.BENCH_IRON_BLOCK.get(), new Item.Properties()
+                    .tab(ItemGroup.TAB_DECORATIONS)
+            )
+    );
 }

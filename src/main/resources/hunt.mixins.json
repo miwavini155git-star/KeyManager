@@ -4,7 +4,9 @@
   "package": "ru.iglo.hunt.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "hunt.refmap.json",
-  "mixins": [],
+  "mixins": [
+    "JumpPlayerMixin"
+  ],
   "client": [
   ],
   "injectors": {

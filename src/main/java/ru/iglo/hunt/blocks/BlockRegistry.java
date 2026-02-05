@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import ru.iglo.hunt.block.BenchBlock;
 import ru.iglo.hunt.keys.KeyType;
 
 public class BlockRegistry {
@@ -60,6 +61,14 @@ public class BlockRegistry {
             () -> new ru.iglo.hunt.block.TablichkaBlock(Block.Properties.of(Material.WOOD)
                     .noOcclusion()
                     .strength(1.0f, 1.0f)
+            )
+    );
+
+    // 7. Скамейка из железа с поддержкой разных направлений
+    public static final RegistryObject<Block> BENCH_IRON_BLOCK = BLOCKS.register("bench_iron",
+            () -> new BenchBlock(Block.Properties.of(Material.METAL)
+                    .noOcclusion()
+                    .strength(2.0f, 2.0f)
             )
     );
 }

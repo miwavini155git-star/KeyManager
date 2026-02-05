@@ -16,6 +16,7 @@ public class CommandRegistry {
 
         // Регистрируем все команды
         HospitalKeyCommands.register(dispatcher);
+        JumpCommand.register(dispatcher);
         // Добавьте здесь другие команды по мере создания
 
         System.out.println("[Hunt] Commands registered successfully");
